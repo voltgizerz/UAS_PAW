@@ -45,8 +45,8 @@
                         <td class="text-center"><?= $sm['bahan_bakar'] ?></td>
                         <td class="text-center"><?= $sm['email_pembeli'] ?></td>
                         <td>
-                            <a href="<?= base_url(); ?>user/updateJualMobil/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
-                            <a href="<?= base_url(); ?>user/hapusJualMobil/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
+                            <a href="<?= base_url(); ?>admin/updateJualMobilAdmin/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
+                            <a href="<?= base_url(); ?>admin/hapusJualMobilAdmin/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
                         </td>
                     </tr>
                     <?php $i++; ?>
@@ -68,7 +68,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('user/sellcars'); ?>" method="post">
+            <form action="<?= base_url('admin/configsellcars'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
@@ -112,7 +112,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url(); ?>user/updateJualMobil/<?= $sm['id']; ?>" method="post">
+                <form action="<?= base_url(); ?>admin/updateJualMobilAdmin/<?= $sm['id']; ?>" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                             <input hidden type="text" class="form-control" value="<?= $sm['id']; ?>" id="id" name="id">

@@ -10,6 +10,13 @@ class Jual_model extends CI_Model
         $tampilDataPembeli = $data['user']['email'];
         return $this->db->get_where('sell_cars', ['email_Pembeli' => $tampilDataPembeli])->result_array();
     }
+    
+
+    public function getDataJualMobilAdmin()
+    {
+
+        return $this->db->get_where('sell_cars')->result_array();
+    }
 
     
 

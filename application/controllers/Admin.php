@@ -107,10 +107,10 @@ class Admin extends CI_Controller
 
     public function configsellcars()
     {
-        $data['title'] = 'Sell Car';
+        $data['title'] = 'Sell Car Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Jual_Model', 'menu');
-        $data['dataJualMobil'] = $this->menu->getDataJualMobil();
+        $data['dataJualMobil'] = $this->menu->getDataJualMobilAdmin();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('name', 'Name', 'required');
@@ -124,7 +124,7 @@ class Admin extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('sellcars/sellcars', $data);
+            $this->load->view('admin/configsellcars', $data);
             $this->load->view('templates/footer');
         } else {
             $emailPembeli = $data['user']['email'];
@@ -140,18 +140,18 @@ class Admin extends CI_Controller
 
             $this->db->insert('sell_cars', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            New Cars Added
+            Your New Cars Added
            </div>');
-            redirect('user/sellcars');
+            redirect('admin/configsellcars');
         }
     }
 
-    public function configssparepart()
+    public function configsparepart()
     {
-        $data['title'] = 'Sell Sparepart';
+        $data['title'] = 'Sparepart Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Sparepart_Model', 'menu');
-        $data['dataBeliSparepart'] = $this->menu->getDataBeliSparepart();
+        $data['dataBeliSparepart'] = $this->menu->getDataBeliSparepartAdmin();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim|alpha');
@@ -165,7 +165,7 @@ class Admin extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/configssparepart', $data);
+            $this->load->view('admin/configsparepart', $data);
             $this->load->view('templates/footer');
         } else {
             $emailPembeli = $data['user']['email'];
@@ -204,23 +204,23 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                Sparepart Success Deleted!
                </div>');
-        redirect('admin/buysparepart');
+        redirect('admin/configsparepart');
     }
 
-    public function hapusJualMobil($id)
+    public function hapusJualMobilAdmin($id)
     {
         $this->load->model('Jual_Model');
         $this->Jual_Model->deleteJualMobil($id);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                Your Car Success Deleted!
                </div>');
-        redirect('user/sellcars');
+        redirect('admin/configsellcars');
     }
 
 
-    public function updateSparepart($id)
+    public function updateSparepartAdmin($id)
     {
-        $data['title'] = 'Sell Sparepart';
+        $data['title'] = 'Sparepart Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Sparepart_Model', 'menu');
         $data['dataBeliSparepart'] = $this->menu->getBuySparepartById($id);
@@ -256,13 +256,13 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Sparepart Success Edited!
            </div>');
-            redirect('user/buysparepart');
+            redirect('admin/configsparepart');
         }
     }
 
-    public function updateJualMobil($id)
+    public function updateJualMobilAdmin($id)
     {
-        $data['title'] = 'Sell Car';
+        $data['title'] = 'Sell Car Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Jual_Model', 'menu');
         $data['dataJualMobil'] = $this->menu->getJualMobilById($id);
@@ -279,7 +279,7 @@ class Admin extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('sellcars/sellcars', $data);
+            $this->load->view('admin/configsellcars', $data);
             $this->load->view('templates/footer');
         } else {
             $emailPembeli = $data['user']['email'];
@@ -298,7 +298,49 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Your Car Success Edited!
            </div>');
-            redirect('user/sellcars');
+            redirect('admin/configsellcars');
+        }
+    }
+
+
+    public function configuser()
+    {
+        $data['title'] = 'User Management';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Member_Model', 'menu');
+        $data['dataMember'] = $this->menu->getMemberAdmin();
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('merk', 'Merk', 'required');
+        $this->form_validation->set_rules('warna', 'Color', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+        $this->form_validation->set_rules('bahan_bakar', 'Fuel', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['menu'] = $this->db->get('user_menu')->result_array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/configuser', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $emailPembeli = $data['user']['email'];
+
+            $data = [
+                'name' => $this->input->post('name'),
+                'merk' => $this->input->post('merk'),
+                'warna' => $this->input->post('warna'),
+                'bahan_bakar' => $this->input->post('bahan_bakar'),
+                'harga' => $this->input->post('harga'),
+                'email_pembeli' => $emailPembeli
+            ];
+
+            $this->db->insert('sell_cars', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Your New Cars Added
+           </div>');
+            redirect('admin/configsellcars');
         }
     }
 }
