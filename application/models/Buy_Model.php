@@ -11,6 +11,12 @@ class Buy_model extends CI_Model
         return $this->db->get_where('buy_cars', ['email_Pembeli' => $tampilDataPembeli])->result_array();
     }
 
+
+    public function getDataBeliMobilAdmin()
+    {
+        return $this->db->get_where('buy_cars')->result_array();
+    }
+
     public function deleteBuyCars($id)
     {
         $this->db->where('id', $id);

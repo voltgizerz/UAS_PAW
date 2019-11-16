@@ -11,6 +11,8 @@ class Sparepart_model extends CI_Model
         return $this->db->get_where('buy_sparepart', ['email_Pembeli' => $tampilDataPembeli])->result_array();
     }
 
+    
+
     public function deleteBuySparepart($id)
     {
         $this->db->where('id', $id);

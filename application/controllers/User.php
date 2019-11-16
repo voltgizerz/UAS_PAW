@@ -176,22 +176,22 @@ class User extends CI_Controller
     {
         $data['title'] = 'Sell Car';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->load->model('Buy_Model', 'menu');
-        $data['dataBeliMobil'] = $this->menu->getDataBeliMobil();
+        $this->load->model('Jual_Model', 'menu');
+        $data['dataJualMobil'] = $this->menu->getDataJualMobil();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('merk', 'Merk', 'required');
-        $this->form_validation->set_rules('type', 'Type', 'required');
+        $this->form_validation->set_rules('warna', 'Color', 'required');
         $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
-        $this->form_validation->set_rules('nomorhp', 'Nomorhp', 'required|min_length[10]');
+        $this->form_validation->set_rules('bahan_bakar', 'Fuel', 'required');
 
         if ($this->form_validation->run() == false) {
             $data['menu'] = $this->db->get('user_menu')->result_array();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('buycars/buycars', $data);
+            $this->load->view('sellcars/sellcars', $data);
             $this->load->view('templates/footer');
         } else {
             $emailPembeli = $data['user']['email'];
@@ -199,17 +199,17 @@ class User extends CI_Controller
             $data = [
                 'name' => $this->input->post('name'),
                 'merk' => $this->input->post('merk'),
-                'type' => $this->input->post('type'),
+                'warna' => $this->input->post('warna'),
+                'bahan_bakar' => $this->input->post('bahan_bakar'),
                 'harga' => $this->input->post('harga'),
-                'nomorhp' => $this->input->post('nomorhp'),
                 'email_pembeli' => $emailPembeli
             ];
 
-            $this->db->insert('buy_cars', $data);
+            $this->db->insert('sell_cars', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             New Cars Added
            </div>');
-            redirect('user/buycars');
+            redirect('user/sellcars');
         }
     }
 
@@ -274,6 +274,16 @@ class User extends CI_Controller
         redirect('user/buysparepart');
     }
 
+    public function hapusJualMobil($id)
+    {
+        $this->load->model('Jual_Model');
+        $this->Jual_Model->deleteJualMobil($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+               Your Car Success Deleted!
+               </div>');
+        redirect('user/sellcars');
+    }
+
 
     public function updateSparepart($id)
     {
@@ -314,6 +324,48 @@ class User extends CI_Controller
             Sparepart Success Edited!
            </div>');
             redirect('user/buysparepart');
+        }
+    }
+
+    public function updateJualMobil($id)
+    {
+        $data['title'] = 'Sell Car';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Jual_Model', 'menu');
+        $data['dataJualMobil'] = $this->menu->getJualMobilById($id);
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('merk', 'Merk', 'required');
+        $this->form_validation->set_rules('warna', 'Color', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+        $this->form_validation->set_rules('bahan_bakar', 'Fuel', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['menu'] = $this->db->get('user_menu')->result_array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('sellcars/sellcars', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $emailPembeli = $data['user']['email'];
+
+            $data = [
+                'name' => $this->input->post('name'),
+                'merk' => $this->input->post('merk'),
+                'warna' => $this->input->post('warna'),
+                'bahan_bakar' => $this->input->post('bahan_bakar'),
+                'harga' => $this->input->post('harga'),
+                'email_pembeli' => $emailPembeli
+            ];
+
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('sell_cars', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Your Car Success Edited!
+           </div>');
+            redirect('user/sellcars');
         }
     }
 }
