@@ -25,7 +25,7 @@
                 <tr>
                     <th scope="col" class="text-center">No</th>
                     <th scope="col" class="text-center">Full Name</th>
-                    <th scope="col" class="text-center" y>Merk</th>
+                    <th scope="col" class="text-center" >Merk</th>
                     <th scope="col" class="text-center">Type</th>
                     <th scope="col" class="text-center">Price Deal</th>
                     <th scope="col" class="text-center">Contact Message</th>

@@ -93,6 +93,9 @@ class Menu extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('menu/submenu', $data);
             $this->load->view('templates/footer');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+           Failed Edit Menu!
+            </div>');
             redirect('menu/submenu');
         } else {
             $data = [
@@ -101,7 +104,6 @@ class Menu extends CI_Controller
                 'url' => $this->input->post('url'),
                 'icon' => $this->input->post('icon'),
                 'is_active' => $this->input->post('is_active'),
-
             ];
             $this->db->where('id', $this->input->post('id'));
             $this->db->update('user_sub_menu', $data);

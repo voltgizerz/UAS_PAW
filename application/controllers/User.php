@@ -152,7 +152,6 @@ class User extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('buycars/buycars', $data);
             $this->load->view('templates/footer');
-            redirect('user/buycars');
         } else {
             $emailPembeli = $data['user']['email'];
             $data = [
@@ -216,7 +215,7 @@ class User extends CI_Controller
 
     public function buysparepart()
     {
-        $data['title'] = 'Buy Sparepart';
+        $data['title'] = 'Sell Sparepart';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Sparepart_Model', 'menu');
         $data['dataBeliSparepart'] = $this->menu->getDataBeliSparepart();
@@ -278,7 +277,7 @@ class User extends CI_Controller
 
     public function updateSparepart($id)
     {
-        $data['title'] = 'Buy Sparepart';
+        $data['title'] = 'Sell Sparepart';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->model('Sparepart_Model', 'menu');
         $data['dataBeliSparepart'] = $this->menu->getBuySparepartById($id);
