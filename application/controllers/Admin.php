@@ -312,10 +312,10 @@ class Admin extends CI_Controller
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->form_validation->set_rules('name', 'Name', 'required');
-        $this->form_validation->set_rules('merk', 'Merk', 'required');
-        $this->form_validation->set_rules('warna', 'Color', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
-        $this->form_validation->set_rules('bahan_bakar', 'Fuel', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('role_id', 'Role', 'required|numeric');
+        $this->form_validation->set_rules('is_active', 'Active', 'required');
 
         if ($this->form_validation->run() == false) {
             $data['menu'] = $this->db->get('user_menu')->result_array();
@@ -325,22 +325,20 @@ class Admin extends CI_Controller
             $this->load->view('admin/configuser', $data);
             $this->load->view('templates/footer');
         } else {
-            $emailPembeli = $data['user']['email'];
-
             $data = [
                 'name' => $this->input->post('name'),
-                'merk' => $this->input->post('merk'),
-                'warna' => $this->input->post('warna'),
-                'bahan_bakar' => $this->input->post('bahan_bakar'),
-                'harga' => $this->input->post('harga'),
-                'email_pembeli' => $emailPembeli
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('password'),
+                'role_id' => $this->input->post('role_id'),
+                'is_active' => $this->input->post('is_active'),
+                'image' => 'default.jpg'
             ];
 
             $this->db->insert('sell_cars', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Your New Cars Added
            </div>');
-            redirect('admin/configsellcars');
+            redirect('admin/configuser');
         }
     }
 }

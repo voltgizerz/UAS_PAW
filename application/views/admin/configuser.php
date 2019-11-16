@@ -26,7 +26,7 @@
                     <th scope="col" class="text-center">No</th>
                     <th scope="col" class="text-center">Full Name</th>
                     <th scope="col" class="text-center">Member Email</th>
-                    <th scope="col" class="text-center">Member Image</th>
+                    <th scope="col" class="text-center">Profile Image</th>
                     <th scope="col" class="text-center">Role</th>
                     <th scope="col" class="text-center">STATUS</th>
                     <th scope="col" class="text-center">Action</th>
@@ -52,8 +52,8 @@
                         <?php endif; ?>
 
                         <td>
-                            <a href="<?= base_url(); ?>admin/updateMobilAdmin/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal">EDIT</a>
-                            <a href="<?= base_url(); ?>admin/hapusMobilAdmin/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
+                            <a href="<?= base_url(); ?>admin/updateMember/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal">EDIT</a>
+                            <a href="<?= base_url(); ?>admin/hapusMember/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
                         </td>
                     </tr>
                     <?php $i++; ?>
@@ -75,32 +75,30 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/configbuycars'); ?>" method="post">
+            <form action="<?= base_url('admin/configuser'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="merk" id="merk" placeholder="Name Car">
-                            <option value=''>Cars Model</option>
-                            <option value="Lamborghini Sián">Lamborghini Sián</option>
-                            <option value="McLaren">McLaren</option>
-                            <option value="Ferrari">Ferrari</option>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email Member">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="passsword" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="role_id" id="role_id">
+                            <option value=''>ROLE</option>
+                            <option value="1">ADMIN</option>
+                            <option value="2" selected>USER</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="type" id="type" placeholder="Name Car">
-                            <option value=''>Cars Type</option>
-                            <option value="FKP 37">FKP 37</option>
-                            <option value="MCL34">MCL34</option>
-                            <option value="812 GTS">812 GTS</option>
+                        <select class="form-control" name="is_active" id="is_active">
+                            <option value=''>Active This User ?</option>
+                            <option value="1" selected>ACTIVE</option>
+                            <option value="0">BAN USER</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="harga" name="harga" placeholder="Price Deal">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nomorhp" name="nomorhp" placeholder="Phone Number">
                     </div>
 
                 </div>

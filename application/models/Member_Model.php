@@ -15,11 +15,11 @@ class Member_Model extends CI_Model
     public function deleteMember($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('sell_cars');
+        $this->db->delete('user');
     }
 
     public function getMemberId($id)
     {
-        return $this->db->get_where('sell_cars', ['id' => $id])->result_array();
+        return $this->db->get_where('user', ['id' => $id])->result_array();
     }
 }
