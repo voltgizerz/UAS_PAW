@@ -104,7 +104,6 @@
     </div>
 </div>
 
-
 <!-- edit Modal -->
 <div class="modal fade" id="updateSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="#updateSubMenuModal" aria-hidden="true">
 

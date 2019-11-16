@@ -111,7 +111,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url(); ?>user/buysparepart" method="post">
+                <form action="<?= base_url(); ?>user/updateSparepart/<?= $sm['id']; ?>" method="post">
 
                     <div class="modal-body">
                         <div class="form-group">

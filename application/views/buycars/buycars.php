@@ -45,7 +45,7 @@
                         <td class="text-center"><?= $sm['nomorhp'] ?></td>
                         <td class="text-center"><?= $sm['email_pembeli'] ?></td>
                         <td>
-                            <a href="<?= base_url(); ?>user/updateMobil/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
+                            <a href="<?= base_url(); ?>user/updateMobil/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal">EDIT</a>
                             <a href="<?= base_url(); ?>user/hapusMobil/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
                         </td>
                     </tr>
@@ -108,7 +108,7 @@
 
 <?php foreach ($dataBeliMobil as $sm) : ?>
     <!-- Modal edit -->
-    <div class="modal fade" id="editSubMenuModal<?= $sm['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="#editSubMenuModal" aria-hidden="true">
+    <div class="modal fade" id="editSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="#editSubMenuModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -117,7 +117,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url(); ?>user/buycars" method="post">
+                <form action="<?= base_url(); ?>user/updateMobil/<?= $sm['id']; ?>" method="post">
 
                     <div class="modal-body">
                         <div class="form-group">
@@ -173,11 +173,10 @@
                         <div class="form-group">
                             <input type="text" class="form-control" value="<?= $sm['nomorhp']; ?>" id="nomorhp" name="nomorhp" placeholder="Phone Number">
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" href="<?= base_url(); ?>user/updateMobil/<?= $sm['id']; ?>">Edit</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </form>
             </div>

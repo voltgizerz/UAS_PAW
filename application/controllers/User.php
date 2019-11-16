@@ -312,7 +312,7 @@ class User extends CI_Controller
             $this->db->where('id', $this->input->post('id'));
             $this->db->update('buy_sparepart', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Cars Success Edited!
+            Sparepart Success Edited!
            </div>');
             redirect('user/buysparepart');
         }
