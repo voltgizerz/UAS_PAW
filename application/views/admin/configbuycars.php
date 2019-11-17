@@ -45,7 +45,7 @@
                         <td class="text-center"><?= $sm['nomorhp'] ?></td>
                         <td class="text-center"><?= $sm['email_pembeli'] ?></td>
                         <td>
-                            <a href="<?= base_url(); ?>admin/updateMobilAdmin/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal">EDIT</a>
+                            <a href="<?= base_url(); ?>admin/updateMobilAdmin/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
                             <a href="<?= base_url(); ?>admin/hapusMobilAdmin/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
                         </td>
                     </tr>
@@ -108,7 +108,7 @@
 
 <?php foreach ($dataBeliMobil as $sm) : ?>
     <!-- Modal edit -->
-    <div class="modal fade" id="editSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="#editSubMenuModal" aria-hidden="true">
+    <div class="modal fade" id="editSubMenuModal<?= $sm['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="#editSubMenuModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

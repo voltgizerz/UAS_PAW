@@ -52,8 +52,8 @@
                         <?php endif; ?>
 
                         <td>
-                            <a href="<?= base_url(); ?>admin/updateMember/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal">EDIT</a>
-                            <a href="<?= base_url(); ?>admin/hapusMember/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
+                            <a href="<?= base_url(); ?>admin/updateMember/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
+                            <a href="<?= base_url(); ?>admin/hapusMemberAdmin/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
                         </td>
                     </tr>
                     <?php $i++; ?>
@@ -84,13 +84,13 @@
                         <input type="text" class="form-control" id="email" name="email" placeholder="Email Member">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" name="passsword" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="role_id" id="role_id">
                             <option value=''>ROLE</option>
                             <option value="1">ADMIN</option>
-                            <option value="2" selected>USER</option>
+                            <option value="2" selected>MEMBER</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -113,69 +113,57 @@
 
 <?php foreach ($dataMember as $sm) : ?>
     <!-- Modal edit -->
-    <div class="modal fade" id="editSubMenuModal" tabindex="-1" role="dialog" aria-labelledby="#editSubMenuModal" aria-hidden="true">
+    <div class="modal fade" id="editSubMenuModal<?= $sm['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="#editSubMenuModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editSubMenuModal">Edit Cars</h5>
+                    <h5 class="modal-title" id="editSubMenuModal">Edit Profile Using Admin</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url(); ?>admin/updateMobilAdmin/<?= $sm['id']; ?>" method="post">
+                <form action="<?= base_url(); ?>admin/updateMember/<?= $sm['id']; ?>" method="post">
 
                     <div class="modal-body">
                         <div class="form-group">
                             <input hidden type="text" class="form-control" value="<?= $sm['id']; ?>" id="id" name="id" placeholder="Full Name">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" value="<?= $sm['name']; ?>" id="name" name="name" placeholder="Full Name">
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $sm['name']; ?>" placeholder="Full Name">
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="merk" id="merk" placeholder="Name Car">
-                                <?php if ($sm['merk'] == 'Lamborghini Sián') : ?>
-                                    <option value=''>Cars Model</option>
-                                    <option value="Lamborghini Sián" selected>Lamborghini Sián</option>
-                                    <option value="McLaren">McLaren</option>
-                                    <option value="Ferrari">Ferrari</option>
-                                <?php elseif ($sm['merk'] == 'McLaren') : ?>
-                                    <option value=''>Cars Model</option>
-                                    <option value="Lamborghini Sián">Lamborghini Sián</option>
-                                    <option value="McLaren" selected>McLaren</option>
-                                    <option value="Ferrari">Ferrari</option>
-                                <?php elseif ($sm['merk'] == 'Ferrari') : ?>
-                                    <option value=''>Cars Model</option>
-                                    <option value="Lamborghini Sián">Lamborghini Sián</option>
-                                    <option value="McLaren">McLaren</option>
-                                    <option value="Ferrari" selected>Ferrari</option>
+                            <input type="text" class="form-control" id="email" name="email" value="<?= $sm['email']; ?>" placeholder="Email Member" readonly>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" value=" " placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="role_id" id="role_id">
+                                <?php if ($sm['role_id'] == '1') : ?>
+                                    <option value=''>ROLE</option>
+                                    <option value="1" selected>ADMIN</option>
+                                    <option value="2">MEMBER</option>
+                                <?php elseif ($sm['role_id'] == '2') : ?>
+                                    <option value=''>ROLE</option>
+                                    <option value="1">ADMIN</option>
+                                    <option value="2" selected>MEMBER</option>
                                 <?php endif; ?>
+
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="type" id="type" placeholder="Name Car">
-                                <?php if ($sm['type'] == 'FKP 37') : ?>
-                                    <option value=''>Cars Type</option>
-                                    <option value="FKP 37" selected>FKP 37</option>
-                                    <option value="MCL34">MCL34</option>
-                                    <option value="812 GTS">812 GTS</option>
-                                <?php elseif ($sm['type'] == 'MCL34') : ?>
-                                    <option value=''>Cars Type</option>
-                                    <option value="FKP 37">FKP 37</option>
-                                    <option value="MCL34" selected>MCL34</option>
-                                    <option value="812 GTS">812 GTS</option>
-                                <?php elseif ($sm['type'] == '812 GTS') : ?>
-                                    <option value=''>Cars Type</option>
-                                    <option value="FKP 37">FKP 37</option>
-                                    <option value="MCL34">MCL34</option>
-                                    <option value="812 GTS" selected>812 GTS</option>
+                            <select class="form-control" name="is_active" id="is_active">
+                                <?php if ($sm['is_active'] == '1') : ?>
+                                    <option value=''>Active This User ?</option>
+                                    <option value="1" selected>ACTIVE</option>
+                                    <option value="0">BAN MEMBER</option>
+                                <?php elseif ($sm['is_active'] == '0') : ?>
+                                    <option value=''>Active This User ?</option>
+                                    <option value="1">ACTIVE</option>
+                                    <option value="0" selected>BAN MEMBER</option>
                                 <?php endif; ?>
+
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" value="<?= $sm['harga']; ?>" id="harga" name="harga" placeholder="Price Deal">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" value="<?= $sm['nomorhp']; ?>" id="nomorhp" name="nomorhp" placeholder="Phone Number">
                         </div>
                     </div>
                     <div class="modal-footer">
