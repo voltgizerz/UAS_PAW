@@ -35,23 +35,37 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1; ?>
-                <?php foreach ($dataJualMobil as $sm) : ?>
+                <?php if ($dataJualMobil != NULL) :  ?>
+                    <?php $i = 1; ?>
+                    <?php foreach ($dataJualMobil as $sm) : ?>
+                        <tr>
+                            <th scope="row" class="text-center"><?= $i ?></th>
+                            <td><?= $sm['name'] ?></td>
+                            <td class="text-center"><?= $sm['merk'] ?></td>
+                            <td class="text-center"><?= $sm['warna'] ?></td>
+                            <td class="text-center"><?= $sm['harga'] ?></td>
+                            <td class="text-center"><?= $sm['bahan_bakar'] ?></td>
+                            <td class="text-center"><?= $sm['email_pembeli'] ?></td>
+                            <td>
+                                <a href="<?= base_url(); ?>user/updateJualMobil/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
+                                <a href="<?= base_url(); ?>user/hapusJualMobil/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
+                            </td>
+                        </tr>
+                        <?php $i++; ?>
+                    <?php endforeach; ?>
+                <?php elseif ($dataJualMobil == NULL) : ?>
                     <tr>
-                        <th scope="row" class="text-center"><?= $i ?></th>
-                        <td><?= $sm['name'] ?></td>
-                        <td class="text-center"><?= $sm['merk'] ?></td>
-                        <td class="text-center"><?= $sm['warna'] ?></td>
-                        <td class="text-center"><?= $sm['harga'] ?></td>
-                        <td class="text-center"><?= $sm['bahan_bakar'] ?></td>
-                        <td class="text-center"><?= $sm['email_pembeli'] ?></td>
+                        <th scope="row" class="text-center">X</th>
+                        <td class="text-center">EMPTY DATA</td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
                         <td>
-                            <a href="<?= base_url(); ?>user/updateJualMobil/<?= $sm['id']; ?>" class="badge badge-primary mb-3" data-toggle="modal" data-target="#editSubMenuModal<?= $sm['id']; ?>">EDIT</a>
-                            <a href="<?= base_url(); ?>user/hapusJualMobil/<?= $sm['id']; ?>" class="badge badge-danger mb-3">DELETE</a>
                         </td>
                     </tr>
-                    <?php $i++; ?>
-                <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
