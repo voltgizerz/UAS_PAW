@@ -17,6 +17,7 @@
             </div>
         <?php endif; ?>
         <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">SELL CAR</a>
+        <a href="<?php echo site_url('Laporan/laporanJualMobil') ?>" class="btn btn-primary mb-3" style="background-color:RED; ">PRINT TO PDF</a>
 
         <?= $this->session->flashdata('message'); ?>
 

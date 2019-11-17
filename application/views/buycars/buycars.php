@@ -17,6 +17,7 @@
             </div>
         <?php endif; ?>
         <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubMenuModal">BUY CARS</a>
+        <a href="<?php echo site_url('Laporan/laporanBeliMobil') ?>" class="btn btn-primary mb-3" style="background-color:RED; ">PRINT TO PDF</a>
 
         <?= $this->session->flashdata('message'); ?>
 
@@ -25,7 +26,7 @@
                 <tr>
                     <th scope="col" class="text-center">No</th>
                     <th scope="col" class="text-center">Full Name</th>
-                    <th scope="col" class="text-center" >Merk</th>
+                    <th scope="col" class="text-center">Merk</th>
                     <th scope="col" class="text-center">Type</th>
                     <th scope="col" class="text-center">Price Deal</th>
                     <th scope="col" class="text-center">Contact Message</th>
