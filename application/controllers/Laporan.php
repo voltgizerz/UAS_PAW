@@ -24,8 +24,8 @@ class Laporan extends CI_Controller
         $pdf->Cell(10, 7, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(10, 6, 'NO', 1, 0, 'C');
-        $pdf->Cell(70, 6, 'FULL NAME', 1, 0, 'C');
-        $pdf->Cell(20, 6, 'MERK', 1, 0, 'C');
+        $pdf->Cell(50, 6, 'FULL NAME', 1, 0, 'C');
+        $pdf->Cell(30, 6, 'MERK', 1, 0, 'C');
         $pdf->Cell(40, 6, 'TYPE', 1, 0, 'C');
         $pdf->Cell(40, 6, 'PRICE DEAL', 1, 0, 'C');
         $pdf->Cell(60, 6, 'CONTACT MESSAGE', 1, 0, 'C');
@@ -34,8 +34,8 @@ class Laporan extends CI_Controller
         $buku = $this->db->get('buy_cars')->result();
         foreach ($buku as $row) {
             $pdf->Cell(10, 6, $cnt, 1, 0, 'C', 0);
-            $pdf->Cell(70, 6, $row->name, 1, 0);
-            $pdf->Cell(20, 6, $row->merk, 1, 0, 'C');
+            $pdf->Cell(50, 6, $row->name, 1, 0);
+            $pdf->Cell(30, 6, $row->merk, 1, 0, 'C');
             $pdf->Cell(40, 6, $row->type, 1, 0, 'C');
             $pdf->Cell(40, 6, $row->harga, 1, 0, 'C');
             $pdf->Cell(60, 6, $row->nomorhp, 1, 0, 'C');
@@ -180,8 +180,8 @@ class Laporan extends CI_Controller
         $pdf->Cell(10, 7, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 10);
         $pdf->Cell(10, 6, 'NO', 1, 0, 'C');
-        $pdf->Cell(70, 6, 'FULL NAME', 1, 0, 'C');
-        $pdf->Cell(20, 6, 'MERK', 1, 0, 'C');
+        $pdf->Cell(50, 6, 'FULL NAME', 1, 0, 'C');
+        $pdf->Cell(30, 6, 'MERK', 1, 0, 'C');
         $pdf->Cell(40, 6, 'TYPE', 1, 0, 'C');
         $pdf->Cell(40, 6, 'PRICE DEAL', 1, 0, 'C');
         $pdf->Cell(60, 6, 'CONTACT MESSAGE', 1, 0, 'C');
@@ -192,8 +192,8 @@ class Laporan extends CI_Controller
         $buku = $this->db->get_where('buy_cars', ['email_Pembeli' => $tampilDataPembeli])->result();
         foreach ($buku as $row) {
             $pdf->Cell(10, 6, $cnt, 1, 0, 'C', 0);
-            $pdf->Cell(70, 6, $row->name, 1, 0);
-            $pdf->Cell(20, 6, $row->merk, 1, 0, 'C');
+            $pdf->Cell(50, 6, $row->name, 1, 0);
+            $pdf->Cell(30, 6, $row->merk, 1, 0, 'C');
             $pdf->Cell(40, 6, $row->type, 1, 0, 'C');
             $pdf->Cell(40, 6, $row->harga, 1, 0, 'C');
             $pdf->Cell(60, 6, $row->nomorhp, 1, 0, 'C');
