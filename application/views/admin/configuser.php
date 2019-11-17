@@ -48,8 +48,10 @@
                         <?php endif; ?>
                         <?php if ($sm['is_active'] == '1') : ?>
                             <td class="text-center">ACTIVE</td>
-                        <?php elseif ($sm['role_id'] == '0') : ?>
-                            <td class="text-center">NOT ACTIVATED></td>
+                        <?php elseif ($sm['is_active'] == '0') : ?>
+                            <td class="text-center">NOT ACTIVATED</td>
+                        <?php elseif ($sm['is_active'] == '3') : ?>
+                            <td class="text-center">BANNED USER</td>
                         <?php endif; ?>
 
                         <td>
@@ -98,7 +100,8 @@
                         <select class="form-control" name="is_active" id="is_active">
                             <option value=''>Active This User ?</option>
                             <option value="1" selected>ACTIVE</option>
-                            <option value="0">BAN USER</option>
+                            <option value="0">NOT ACTIVATED</option>
+                            <option value="3">BANNED USER</option>
                         </select>
                     </div>
 
@@ -157,11 +160,18 @@
                                 <?php if ($sm['is_active'] == '1') : ?>
                                     <option value=''>Active This User ?</option>
                                     <option value="1" selected>ACTIVE</option>
-                                    <option value="0">BAN MEMBER</option>
+                                    <option value="0">NOT ACTIVATED</option>
+                                    <option value="3">BANNED USER</option>
                                 <?php elseif ($sm['is_active'] == '0') : ?>
                                     <option value=''>Active This User ?</option>
                                     <option value="1">ACTIVE</option>
-                                    <option value="0" selected>BAN MEMBER</option>
+                                    <option value="0" selected>NOT ACTIVATED</option>
+                                    <option value="3">BANNED USER</option>
+                                <?php elseif ($sm['is_active'] == '3') : ?>
+                                    <option value=''>Active This User ?</option>
+                                    <option value="1">ACTIVE</option>
+                                    <option value="0">NOT ACTIVATED</option>
+                                    <option value="3" selected>BANNED USER</option>
                                 <?php endif; ?>
 
                             </select>
