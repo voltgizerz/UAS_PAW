@@ -368,4 +368,38 @@ class User extends CI_Controller
             redirect('user/sellcars');
         }
     }
+
+    function map()
+    {
+        $data['title'] = 'Map Location';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->model('Jual_Model', 'menu');
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('merk', 'Merk', 'required');
+        $this->form_validation->set_rules('warna', 'Color', 'required');
+        $this->form_validation->set_rules('harga', 'Harga', 'required|numeric');
+        $this->form_validation->set_rules('bahan_bakar', 'Fuel', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $data['menu'] = $this->db->get('user_menu')->result_array();
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+
+            $this->load->library('googlemaps');
+            $config = array();
+            $config['center'] = "-6.1807975,106.7659006";
+            $config['zoom'] = 17;
+            $config['map_height'] = "400px";
+            $this->googlemaps->initialize($config);
+            $marker = array();
+            $marker['position'] = "-6.1807975,106.7659006";
+            $this->googlemaps->add_marker($marker);
+            $data['map'] = $this->googlemaps->create_map();
+            $this->load->view('maps/map', $data);
+            $this->load->view('templates/footer');
+        }
+    }
 }
