@@ -115,6 +115,48 @@ class Auth extends CI_Controller
         }
     }
 
+    public function home()
+    {
+        //validasi registrasi
+        $this->form_validation->set_rules('name', 'Name', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+            'is_unique' => 'This email already registered!'
+        ]);
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[6]');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'RichzAuto - HomePage';
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/home');
+            $this->load->view('templates/auth_footer');
+        } else {
+
+            $email = $this->input->post('email', true);
+            $data = [
+                'name' => htmlspecialchars($this->input->post('name', true)),
+                'email' => htmlspecialchars($email),
+                'image' => 'default.jpg',
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'role_id' => 2,
+                'is_active' => 0,
+                'datecreated' => time()
+            ];
+
+            $token = base64_encode(random_bytes(32));
+            $user_token = [
+                'email' => $email,
+                'token' => $token
+            ];
+
+            $this->db->insert('user', $data);
+            $this->db->insert('user_token', $user_token);
+
+            $this->sendEmail($token, 'verify');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">  Success! Created Your Account Please Check Your Email to activate your account!  </div>');
+            redirect('auth');
+        }
+    }
+
     private function sendEmail($token, $type)
     {
         $config = [

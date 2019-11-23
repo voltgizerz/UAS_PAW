@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user/'); ?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('auth/home'); ?>">
         <div class="sidebar-brand-icon">
             <img src=" <?= base_url('assets/img/logo.png'); ?>">
         </div>
